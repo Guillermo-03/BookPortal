@@ -22,7 +22,7 @@ services:
     build: ./book-portal-be
     image: iammemo/book-portal-be:latest
     container_name: "book-portal-be"
-    restart: on-failure
+    restart: unless-stopped
     environment:
       # Overrides the dead Azure MySQL settings in application.yaml
       SPRING_DATASOURCE_URL: jdbc:mysql://book-portal-db:3306/book_portal?useSSL=false&allowPublicKeyRetrieval=true
@@ -36,6 +36,7 @@ services:
     build: ./book-portal-fe
     image: iammemo/book-portal-fe:latest
     container_name: "book-portal-fe"
+    restart: unless-stopped
     depends_on:
       - book-portal-be
 
